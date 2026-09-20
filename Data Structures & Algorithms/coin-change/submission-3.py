@@ -1,0 +1,13 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        # bottom up approach
+
+        dp = [float('inf')] * (amount+1)
+        dp[0] = 0 # to get amount 0 we need 0 coins
+
+        for i in range(1,amount+1):
+            for coin in coins:
+                if i-coin >=0:
+                    dp[i] = min(1+dp[i-coin],dp[i])
+        
+        return -1 if dp[amount] == float('inf') else dp[amount]
